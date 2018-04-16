@@ -2,15 +2,16 @@ CC = gcc
 CFLAGS := -Wall -Werror -O2 -g
 PREFIX := /usr
 BINDIR := $(PREFIX)/bin
-BIN = termfix
+SBIN = termfix
 
-all: $(BIN)
+all: $(SBIN)
 
 %: %.c
 	$(CC) -o $@ $< $(LIBS) $(CFLAGS)
 
-install: $(BIN)
-	for f in $(BIN); do install -Dm755 $$f $(DESTDIR)$(BINDIR)/$$f; done
+install: $(SBIN)
+	# Install SUID
+	for f in $(SBIN); do install -Dm4755 $$f $(DESTDIR)$(BINDIR)/$$f; done
 
 clean:
-	rm -f $(BIN)
+	rm -f $(SBIN)
