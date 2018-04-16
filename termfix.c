@@ -31,15 +31,15 @@ int main(int argc, char** argv) {
         return 1;
     }
 
-    if (!ioctl(fd, VT_UNLOCKSWITCH, 1)) {
+    if (ioctl(fd, VT_UNLOCKSWITCH, 1) < 0) {
         perror("warn: ioctl VT_UNLOCKSWITCH failed");
     }
 
-    if (!ioctl(fd, KDSETMODE, KD_TEXT)) {
+    if (ioctl(fd, KDSETMODE, KD_TEXT) < 0) {
         perror("warn: ioctl KDSETMODE failed");
     }
 
-    if (!ioctl(fd, KDSKBMODE, K_XLATE)) {
+    if (ioctl(fd, KDSKBMODE, K_XLATE) < 0) {
         perror("warn: ioctl KBSKBMODE failed");
     }
 
